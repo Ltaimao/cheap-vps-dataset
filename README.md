@@ -1,6 +1,6 @@
 # cheap-vps-dataset
 
-A snapshot dataset of real, scraped VPS deal prices from 31 hosting providers,
+A snapshot dataset of real, scraped VPS deal prices from 28 hosting providers,
 plus a small command-line tool to compare them.
 
 This dataset is maintained alongside VPS Deals Wire, an independent comparison
@@ -8,7 +8,7 @@ site for cheap VPS plans: https://www.vpsdealswire.com/
 
 ## What's inside
 
-- `data/vps_plans.csv` — 230 deal rows from 27 providers (snapshot date: 2026-10-01).
+- `data/vps_plans.csv` — 231 deal rows from 28 providers (snapshot date: 2026-10-01).
   Each row is one price the scraper actually found on a provider's own page;
   nothing is invented or estimated.
 - `tools/vps_compare.py` — filter and rank the CSV from your terminal
@@ -36,15 +36,22 @@ current numbers. Row counts and the snapshot date are recorded in
 `data/vps_plans.csv`'s provenance line below.
 
 - Snapshot date: 2026-10-01
-- Rows: 230
-- Providers with deals in this snapshot: 27 of 31 tracked
-  (A2 Hosting, Hetzner Cloud, HostHatch, ServerMania had no deals captured)
+- Rows: 231
+- Providers: 28 — the site's live comparison set. The tracker follows 31
+  providers; 3 (A2 Hosting, Hetzner Cloud, ServerMania) are currently
+  delisted because their pages could not be fetched, so the live site —
+  and this dataset — covers the remaining 28.
+- 230 rows come from the 2026-10-01 scrape; 1 HostHatch row comes from a
+  real browser re-fetch on 2026-09-26 (see `last_updated`). This mirrors
+  exactly what the live site renders.
 
 ## Generation method
 
 Rows are extracted verbatim from the site's latest scraper output
-(`offers.json`, produced by `scraper.py`); only the newest snapshot row per
-deal is kept. No rows are hand-edited and no values are estimated.
+(`offers.json`, produced by `scraper.py`). The single HostHatch row comes
+from the site's refetch log — a real browser re-fetch with captured page
+evidence, the same row the live site renders. No rows are hand-edited
+and no values are estimated.
 
 ## Quick start
 
